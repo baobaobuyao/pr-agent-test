@@ -1,2 +1,2 @@
 # pr-agent-test
-用来测试pr-agent功能
+测试pr-agent功能
