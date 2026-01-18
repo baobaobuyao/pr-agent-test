@@ -10,7 +10,7 @@ jobs:
   pr_agent_job:
     runs-on: ubuntu-latest
 
-    # --- 必须添加以下权限配置 ---
+    # --- 添加以下权限配置 ---
     permissions:
       issues: write
       pull-requests: write
@@ -22,15 +22,7 @@ jobs:
         env:
           # 认证信息
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-          # 修改这里：使用下划线格式代替点号
-          OPENAI_BASE_URL: https://api.deepseek.com/v1
-          OPENAI_MODEL: deepseek-chat
-          
-          # 语言设置
-          CONFIG_FALLBACK_USER_LANGUAGE: "zh"
-          
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }
           # 强制开启描述功能，防止它因为检测到“已有描述”而跳过
           PR_DESCRIPTION_IF_EXIST_DO_NOTHING: "false"
           
