@@ -20,13 +20,26 @@ jobs:
       - name: PR Agent action step
         uses: Codium-ai/pr-agent@main
         env:
-          # 认证信息
+          # --- 1. 基础认证 ---
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OPENAI_BASE_URL: https://api.deepseek.com/v1
-          OPENAI_MODEL: deepseek-chat
-          # 建议添加语言设置
-          CONFIG_FALLBACK_USER_LANGUAGE: zh
-          # --- 添加下面这两行强制触发 ---
-          GITHUB_ACTION_CONFIG.AUTO_DESCRIBE: 'true'
-          PR_DESCRIPTION_IF_EXIST_DO_NOTHING: 'false'
+          
+          # --- 2. 核心模型配置 (使用 CONFIG_ 前缀强制覆盖) ---
+          # 强制指定模型名称
+          CONFIG_MODEL: "deepseek-chat"
+          # 强制指定 Base URL
+          CONFIG_OPENAI_BASE_URL: "https://api.deepseek.com/v1"
+          
+          # --- 3. 关键修复：禁用回退模型 ---
+          # 将回退列表设为空。这样如果 DeepSeek 失败，它会直接报出 DeepSeek 的错误，
+          # 而不是去试 GPT-5 导致误导性的报错。
+          CONFIG_FALLBACK_MODELS: '[]'
+          
+          # --- 4. 语言设置 ---
+          CONFIG_FALLBACK_USER_LANGUAGE: "zh"
+          
+          # --- 5. 触发逻辑配置 ---
+          # 开启推代码自动描述
+          GITHUB_ACTION_CONFIG_AUTO_DESCRIBE: "true"
+          # 允许覆盖已有描述
+          PR_DESCRIPTION_IF_EXIST_DO_NOTHING: "false"
