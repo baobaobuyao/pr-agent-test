@@ -24,22 +24,21 @@ jobs:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
-          # --- 2. 核心模型配置 (使用 CONFIG_ 前缀强制覆盖) ---
-          # 必须加上 "openai/" 前缀！这是强制它走 Custom URL 的暗号
-          CONFIG_MODEL: "openai/deepseek-chat"
-          # 强制指定 Base URL
-          CONFIG_OPENAI_BASE_URL: "https://api.deepseek.com/v1"
+          # --- 2. 核心修改：三重锁定 URL ---
+          # 变量A：Python OpenAI 官方库的标准覆盖变量（最关键！）
+          OPENAI_API_BASE: "https://api.deepseek.com/v1"
+          # 变量B：LiteLLM 常用的覆盖变量
+          OPENAI_BASE_URL: "https://api.deepseek.com/v1"
+          # 变量C：PR-Agent 内部配置映射 (注意是双下划线，对应 openai.api_base)
+          CONFIG_OPENAI__API_BASE: "https://api.deepseek.com/v1"
           
-          # --- 3. 关键修复：禁用回退模型 ---
-          # 将回退列表设为空。这样如果 DeepSeek 失败，它会直接报出 DeepSeek 的错误，
-          # 而不是去试 GPT-5 导致误导性的报错。
+          # --- 3. 模型名称 ---
+          # 既然我们已经用上面的变量劫持了 URL，这里就可以直接写 DeepSeek 的名字
+          # 建议去掉 openai/ 前缀，直接用 deepseek-chat，配合上面的 URL 劫持
+          CONFIG_MODEL: "deepseek-chat"
+          
+          # --- 4. 其他配置 ---
           CONFIG_FALLBACK_MODELS: '[]'
-          
-          # --- 4. 语言设置 ---
           CONFIG_FALLBACK_USER_LANGUAGE: "zh"
-          
-          # --- 5. 触发逻辑配置 ---
-          # 开启推代码自动描述
           GITHUB_ACTION_CONFIG_AUTO_DESCRIBE: "true"
-          # 允许覆盖已有描述
           PR_DESCRIPTION_IF_EXIST_DO_NOTHING: "false"
