@@ -23,8 +23,8 @@ jobs:
         uses: Codium-ai/pr-agent@main
         env:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
-          OPENAI.BASE_URL: https://api.deepseek.com/v1
-          OPENAI.MODEL: deepseek-chat
+          OPENAI_BASE_URL: https://api.deepseek.com/v1
+          OPENA_MODEL: deepseek-chat
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # 建议添加语言设置
           CONFIG.FALLBACK_USER_LANGUAGE: zh
