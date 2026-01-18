@@ -26,6 +26,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # 关键：告诉 PR-Agent 去读取刚才那个 TOML 文件
           CONFIG_PATH: ".pr_agent.toml"
-          
-          # 5. 语言
-          CONFIG_FALLBACK_USER_LANGUAGE: "zh"
