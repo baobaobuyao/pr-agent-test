@@ -26,7 +26,7 @@ jobs:
           OPENAI_BASE_URL: https://api.deepseek.com/v1
           OPENAI_MODEL: deepseek-chat
           # 建议添加语言设置
-          CONFIG.FALLBACK_USER_LANGUAGE: zh
+          CONFIG_FALLBACK_USER_LANGUAGE: zh
           # 强制开启描述功能，防止它因为检测到“已有描述”而跳过
           PR_DESCRIPTION_IF_EXIST_DO_NOTHING: "false"
 
