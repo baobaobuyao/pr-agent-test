@@ -20,23 +20,11 @@ jobs:
       - name: PR Agent action step
         uses: Codium-ai/pr-agent@main
         env:
-          # 1. 认证信息
+          # 依然使用你的 DeepSeek API Key，保存在 GitHub Secrets 里
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-          # 2. 模型重定向 (这是劫持底层库的核武器)
-          OPENAI_API_BASE: "https://api.deepseek.com/v1"
-          
-          # 3. 强制覆盖模型 (使用双下划线映射配置路径)
-          CONFIG_MODEL: "deepseek-chat"
-          # 彻底杀掉回退机制，不准它去试 GPT
-          CONFIG_FALLBACK_MODELS: "[]"
-          
-          # 4. 解决推代码不触发的问题
-          # 注意：这里必须用双下划线代替点！
-          GITHUB_ACTION_CONFIG__AUTO_DESCRIBE: "true"
-          GITHUB_ACTION_CONFIG__AUTO_REVIEW: "true"
-          PR_DESCRIPTION_IF_EXIST_DO_NOTHING: "false"
+          # 关键：告诉 PR-Agent 去读取刚才那个 TOML 文件
+          CONFIG_PATH: ".pr_agent.toml"
           
           # 5. 语言
           CONFIG_FALLBACK_USER_LANGUAGE: "zh"
