@@ -1,0 +1,16 @@
+[config]
+# 必须加上 deepseek/ 前缀，这会强制驱动程序走 DeepSeek 专用通道
+model = "deepseek/deepseek-chat"
+# 强制清空回退模型，不准它去连 OpenAI
+fallback_models = []
+# 响应语言
+fallback_user_language = "zh"
+
+[openai]
+# 显式指定 Base URL
+api_base = "https://api.deepseek.com/v1"
+
+[github_action_config]
+# 开启自动描述和自动评论
+auto_describe = true
+auto_review = true
