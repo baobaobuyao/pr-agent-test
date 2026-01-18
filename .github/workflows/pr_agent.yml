@@ -22,6 +22,7 @@ jobs:
         env:
           # 依然使用你的 DeepSeek API Key，保存在 GitHub Secrets 里
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.OPENAI_KEY }} # 增加这一行
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # 关键：告诉 PR-Agent 去读取刚才那个 TOML 文件
           CONFIG_PATH: ".pr_agent.toml"
