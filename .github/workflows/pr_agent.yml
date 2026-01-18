@@ -1,8 +1,9 @@
 name: PR Agent
 on:
   pull_request:
-    types: [opened, synchronize,created]
+    types: [opened, synchronize]
   issue_comment:
+    types: [created] # 确保能监听到你在评论区输入的指令
 jobs:
   pr_agent_job:
     runs-on: ubuntu-latest
