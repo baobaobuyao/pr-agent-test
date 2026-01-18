@@ -1,7 +1,0 @@
-[openai]
-# 这里的配置优先级最高
-model = "deepseek-chat"
-base_url = "https://api.deepseek.com/v1"
-
-[config]
-fallback_user_language = "zh"
