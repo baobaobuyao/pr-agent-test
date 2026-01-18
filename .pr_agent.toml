@@ -1,0 +1,55 @@
+[config]
+model = "deepseek/deepseek-chat"
+fallback_models = []
+fallback_user_language = "zh"
+
+[openai]
+api_base = "https://api.deepseek.com/v1"
+
+[github_action_config]
+# 关闭所有自动触发，确保只响应手动指令
+auto_describe = false
+auto_review = false
+auto_improve = false
+# 确保所有需要的工具都在可用列表中
+pr_actions_and_tools = [
+    "describe", 
+    "review", 
+    "improve", 
+    "ask", 
+    "update_changelog", 
+    "add_docs", 
+    "generate_labels"
+]
+
+[pr_description]
+# /describe
+extra_instructions = "请务必使用中文。描述应简洁明了，包含修改原因和核心逻辑变更。"
+generate_labels = true # 配合 /describe 自动生成标签
+
+[pr_reviewer]
+# /review
+extra_instructions = "请务必使用中文。重点检查代码健壮性、Go 语言并发安全以及逻辑缺陷。"
+
+[pr_code_suggestions]
+# /improve
+extra_instructions = "请务必使用中文。请提供具体的重构建议，并附带修改前后的代码对比。"
+
+[pr_questions]
+# /ask
+extra_instructions = "请务必使用中文回答。"
+
+[pr_updater]
+# /update_changelog
+extra_instructions = "请务必使用中文更新 CHANGELOG。保持格式整齐，按功能分类记录。"
+
+[add_docs]
+# /add_docs
+extra_instructions = "请务必使用中文（注释除外）。为新增的公共函数和组件添加标准的 Go 风格文档注释。"
+
+[pr_reviewer.generate_labels]
+# /generate_labels
+extra_instructions = "根据 PR 内容生成合适的中文标签。"
+
+[pr_common]
+language = "zh"
