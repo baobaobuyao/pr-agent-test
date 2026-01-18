@@ -27,5 +27,6 @@ jobs:
           OPENAI_MODEL: deepseek-chat
           # 建议添加语言设置
           CONFIG_FALLBACK_USER_LANGUAGE: zh
-          # 强制开启描述功能，防止它因为检测到“已有描述”而跳过
-          PR_DESCRIPTION_IF_EXIST_DO_NOTHING: "false"
+          # --- 添加下面这两行强制触发 ---
+          GITHUB_ACTION_CONFIG.AUTO_DESCRIBE: 'true'
+          PR_DESCRIPTION_IF_EXIST_DO_NOTHING: 'false'
