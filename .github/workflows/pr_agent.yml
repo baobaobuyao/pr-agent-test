@@ -8,8 +8,6 @@ on:
 
 jobs:
   pr_agent_job:
-    # 这一行确保只有在 PR 相关的评论中才触发，避免普通 Issue 干扰
-    if: ${{ github.event.name == 'pull_request' || github.event.issue.pull_request }}
     runs-on: ubuntu-latest
 
     # --- 必须添加以下权限配置 ---
