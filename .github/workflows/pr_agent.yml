@@ -10,5 +10,8 @@ jobs:
       - name: PR Agent action step
         uses: Codium-ai/pr-agent@main
         env:
+
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }} # 见下文模型部分
+          OPENAI.BASE_URL: https://api.deepseek.com/v1
+          OPENAI.MODEL: deepseek-chat
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # 自动获取，无需配置
