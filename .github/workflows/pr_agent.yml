@@ -1,18 +1,30 @@
 name: PR Agent
+
 on:
   pull_request:
     types: [opened, synchronize]
   issue_comment:
-    types: [created] # 确保能监听到你在评论区输入的指令
+    types: [created]
+
 jobs:
   pr_agent_job:
+    # 这一行确保只有在 PR 相关的评论中才触发，避免普通 Issue 干扰
+    if: ${{ github.event.name == 'pull_request' || github.event.issue.pull_request }}
     runs-on: ubuntu-latest
+
+    # --- 必须添加以下权限配置 ---
+    permissions:
+      issues: write
+      pull-requests: write
+      contents: write
+
     steps:
       - name: PR Agent action step
         uses: Codium-ai/pr-agent@main
         env:
-
-          OPENAI_KEY: ${{ secrets.OPENAI_KEY }} # 见下文模型部分
+          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           OPENAI.BASE_URL: https://api.deepseek.com/v1
           OPENAI.MODEL: deepseek-chat
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # 自动获取，无需配置
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # 建议添加语言设置
+          CONFIG.FALLBACK_USER_LANGUAGE: zh
