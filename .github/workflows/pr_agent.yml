@@ -25,8 +25,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
           # --- 2. 核心模型配置 (使用 CONFIG_ 前缀强制覆盖) ---
-          # 强制指定模型名称
-          CONFIG_MODEL: "deepseek-chat"
+          # 必须加上 "openai/" 前缀！这是强制它走 Custom URL 的暗号
+          CONFIG_MODEL: "openai/deepseek-chat"
           # 强制指定 Base URL
           CONFIG_OPENAI_BASE_URL: "https://api.deepseek.com/v1"
           
